@@ -1,6 +1,10 @@
 #include "read_data.h"
 
 int main(){
-    fprintf("hello world");
-    return 1;
+    
+    char test_file = "data/test.csv";
+
+    read_file(test_file);
+
+    return 0;
 }
