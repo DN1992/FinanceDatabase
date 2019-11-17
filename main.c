@@ -2,9 +2,10 @@
 
 int main(){
     
-    char test_file = "data/test.csv";
-
+    char *test_file = "data/test_file.csv";
     read_file(test_file);
 
-    return 0;
+    printf("\n DONE \n");
+    
+    return 1;
 }
