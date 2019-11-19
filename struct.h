@@ -12,6 +12,7 @@ typedef struct Operation{
     struct operation_t *point_id;
     uint16_t id;
     date_t time;
+    int8_t account;
     int8_t io;
     float amount;
     char cat[10];

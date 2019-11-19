@@ -30,7 +30,7 @@
 
 // Functions parameters
 #define SIZE 256
-#define DEBUG 0
+#define DEBUG 1
 
 // Opens the file and reads each line of data
 bool read_file(char *filename);
