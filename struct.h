@@ -9,17 +9,15 @@ typedef struct Date{
 } date_t;
 
 typedef struct Operation{
-    struct operation_t *point_id;
-    uint16_t id;
+    uint32_t id;
     date_t time;
-    int8_t account;
+    uint8_t account;
     int8_t io;
     float amount;
     char cat[10];
     char subcat[10];
     char note[50];
-    struct operation_t *next_point; 
+    struct Operation *next_ptr; 
 } operation_t;
-
 
 #endif
