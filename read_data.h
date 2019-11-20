@@ -36,7 +36,7 @@
 bool read_file(char *filename);
 
 // Transforms the line string into data
-bool string2data();
+struct Operation *str2dat_elem(char *string, operation_t *dataptr);
 
 // Transforms the string into a date
 bool string2date();
