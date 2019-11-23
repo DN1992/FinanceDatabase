@@ -16,7 +16,7 @@ typedef struct Operation{
     float amount;
     char cat[10];
     char subcat[10];
-    char note[50];
+    char title[50];
     struct Operation *next_ptr; 
 } operation_t;
 
