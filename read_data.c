@@ -4,12 +4,14 @@ bool read_file(char *filename){
     // Variables init 
     FILE *fileID;
 
-    size_t buff_size = SIZE;
+    size_t buff_size = BUFFSIZE;
     char *buffer = malloc(buff_size * sizeof(char));
     operation_t *list = calloc(1,sizeof(operation_t));
     list->id = 1;
     list->next_ptr = NULL;
     operation_t *last_el = list;
+    operation_t *aux_ptr = list;
+    
 
     // FILE OPENING
     fileID = fopen(filename,"r");
@@ -17,24 +19,40 @@ bool read_file(char *filename){
         printf("\nERROR OPENING THE FILE!\n");
         return 0;
     }
+
     /////////////////////////////////////////////////////////////////////////////////
     /////////                       READS EACH LINE                        //////////
     /////////////////////////////////////////////////////////////////////////////////
-
     while(getline(&buffer,&buff_size,fileID) !=EOF){
 
         last_el = str2dat_elem(buffer,last_el);
     }
-    printf("\nTitulo do ultimo: \n %s\n",last_el->title);
+    
     /////////////////////////////////////////////////////////////////////////////////
     /////////                     CLOSING AND EXITING                      //////////
     /////////////////////////////////////////////////////////////////////////////////
     fclose(fileID);
+    
+    while(list->next_ptr!=NULL){
+        aux_ptr = list;
+        list = list->next_ptr;
+        free(aux_ptr);
+    }
+    if(list!=last_el){
+        printf("\nLista corrompida\n");
+    }
+    free(aux_ptr);
+    free(last_el);
     free(buffer);
     free(list);
-    return 1;
+    return 1;       
 }
 
+
+
+/////////////////////////////////////////////////////////////////////////////////
+//////////                   WRITES BUFFER INTO LIST                   //////////
+/////////////////////////////////////////////////////////////////////////////////
 struct Operation *str2dat_elem(char *string, operation_t *dataptr){
     // Variable init
     char * date;
@@ -49,16 +67,20 @@ struct Operation *str2dat_elem(char *string, operation_t *dataptr){
 
 
 
-    // SAVE DATE DATA
+    // SAVE DATE
     if((buffer=strsep(&string,";"))!=NULL){
         date = buffer;
     }
+    // SAVE CASH FLOW SIGNAL
     if((buffer=strsep(&string,";"))!=NULL){
         new_el->io = (int8_t) atoi(buffer) ;
     }
+    // SAVE CASH FLOW SIGNAL
     if((buffer = strsep(&string,";")) != NULL){
-        strcpy(new_el->title, buffer);
+        strncpy(new_el->title, buffer,sizeof(new_el->title));
+        new_el->title[NOTESIZE-1] = '\0';
     }
+    
     if((buffer=strsep(&string,";"))!=NULL){
         new_el->amount = atof(buffer);
     }
@@ -66,10 +88,12 @@ struct Operation *str2dat_elem(char *string, operation_t *dataptr){
     buffer=strsep(&string,";");
 
     if((buffer=strsep(&string,";"))!=NULL){
-        strcpy(new_el->subcat,buffer);
+        strncpy(new_el->subcat,buffer,sizeof(new_el->subcat));
+        new_el->subcat[CATSIZE-1] = '\0';
     }
     if((buffer=strsep(&string,";"))!=NULL){
-        strcpy(new_el->cat,buffer);
+        strncpy(new_el->cat,buffer,sizeof(new_el->cat));
+        new_el->cat[CATSIZE-1] = '\0';
     }
     if((buffer=strsep(&string,";"))!=NULL){
         if(!(strcmp(buffer,"CGD"))){
@@ -91,6 +115,7 @@ struct Operation *str2dat_elem(char *string, operation_t *dataptr){
         new_el->time.year   = atoi( strsep(&date,"-") );
 
     }
+    
     free(date);
     free(buffer);
     return new_el;

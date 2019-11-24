@@ -29,7 +29,7 @@
 #include "struct.h"
 
 // Functions parameters
-#define SIZE 256
+#define BUFFSIZE 1056
 #define DEBUG 1
 
 // Opens the file and reads each line of data
