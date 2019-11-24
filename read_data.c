@@ -5,7 +5,7 @@ bool read_file(char *filename){
     FILE *fileID;
 
     size_t buff_size = BUFFSIZE;
-    char *buffer = malloc(buff_size * sizeof(char));
+    char *buffer = malloc(buff_size*sizeof(char));
     operation_t *list = calloc(1,sizeof(operation_t));
     list->id = 1;
     list->next_ptr = NULL;
@@ -24,7 +24,7 @@ bool read_file(char *filename){
     /////////                       READS EACH LINE                        //////////
     /////////////////////////////////////////////////////////////////////////////////
     while(getline(&buffer,&buff_size,fileID) !=EOF){
-
+        
         last_el = str2dat_elem(buffer,last_el);
     }
     
@@ -41,8 +41,6 @@ bool read_file(char *filename){
     if(list!=last_el){
         printf("\nLista corrompida\n");
     }
-    free(aux_ptr);
-    free(last_el);
     free(buffer);
     free(list);
     return 1;       
@@ -64,9 +62,6 @@ struct Operation *str2dat_elem(char *string, operation_t *dataptr){
     dataptr->next_ptr = new_el;
     new_el->next_ptr = NULL;
     
-
-
-
     // SAVE DATE
     if((buffer=strsep(&string,";"))!=NULL){
         date = buffer;
@@ -115,8 +110,5 @@ struct Operation *str2dat_elem(char *string, operation_t *dataptr){
         new_el->time.year   = atoi( strsep(&date,"-") );
 
     }
-    
-    free(date);
-    free(buffer);
     return new_el;
 }
