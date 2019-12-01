@@ -1,0 +1,12 @@
+# Valgraind Massif output files
+massif.out.*
+
+# Compilation output files
+myprogram
+
+# CSV files in data folder
+*.csv
+data/*
+
+# All text files
+*.txt
