@@ -2,7 +2,7 @@
 * FILENAME :        read_data.h             
 *
 * DESCRIPTION :
-*       File compression and decompression routines.
+*       File opening and reading routines.
 *
 * PUBLIC FUNCTIONS :
 *       bool    read_file( char * filename)

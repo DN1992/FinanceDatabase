@@ -3,14 +3,9 @@
 bool read_file(char *filename){
     // Variables init 
     FILE *fileID;
-
+    operation_t * new_el;
     size_t buff_size = BUFFSIZE;
     char *buffer = malloc(buff_size*sizeof(char));
-    operation_t *list = calloc(1,sizeof(operation_t));
-    list->id = 1;
-    list->next_ptr = NULL;
-    operation_t *last_el = list;
-    operation_t *aux_ptr = list;
     
 
     // FILE OPENING
@@ -25,7 +20,8 @@ bool read_file(char *filename){
     /////////////////////////////////////////////////////////////////////////////////
     while(getline(&buffer,&buff_size,fileID) !=EOF){
         
-        last_el = str2dat_elem(buffer,last_el);
+        new_el = str2dat_elem(buffer);
+        add2back(tail,new_el);
     }
     
     /////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +29,8 @@ bool read_file(char *filename){
     /////////////////////////////////////////////////////////////////////////////////
     fclose(fileID);
     
+
+    //TODO move to LINK-LIST API 
     while(list->next_ptr!=NULL){
         aux_ptr = list;
         list = list->next_ptr;
