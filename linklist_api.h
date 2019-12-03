@@ -29,9 +29,10 @@
 #ifndef _LINKLIST_API
 #define _LINKLIST_API
 
-operation_t * add2head();
-operation_t * add2tail();
-operation_t * addel();
+
+bool add2head(operation_t *head,operation_t *new_el);
+bool add2tail(operation_t *head,operation_t *new_el);
+bool addel(operation_t * head, operation_t * new_el, int16_t index);
 operation_t * getel();
 operation_t * remtail();
 operation_t * remhead();
