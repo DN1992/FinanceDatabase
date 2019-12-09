@@ -8,7 +8,7 @@
  */
 
 #include "linklist_api.h"
-
+// TODO Test Link list API  
 
 bool add2head(operation_t *head,operation_t *new_el){
     new_el->next_ptr=head;
@@ -55,8 +55,7 @@ bool remtail(operation_t * head){
 }
 
 operation_t * remhead(operation_t * head){
-    operation_t * new_head=(operation_t *) malloc(sizeof(operation_t));
-    new_head=head->next_ptr;
+    operation_t * new_head=head->next_ptr;
     free(head);
     return new_head;
 }

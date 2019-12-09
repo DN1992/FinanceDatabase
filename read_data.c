@@ -33,10 +33,6 @@ operation_t * read_file(char *filename){
     /////////////////////////////////////////////////////////////////////////////////
     fclose(fileID);
     free(buffer);
-
-    // printf("%d at %d/%d/%d- %s\n",list->id,list->time.day,list->time.month,list->time.year, list->title);
-    // printf("%d. %6.2f (%d) \n",list->io,list->amount,list->account);
-    // printf("Cat: %s. \t Sub: %s\n",list->cat,list->subcat);
     list = remhead(list);
     return list;     
 }
