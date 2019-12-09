@@ -1,12 +1,25 @@
 #include "read_data.h"
+#include "linklist_api.h"
 
 int main(){
-
-    char *test_file = "data/test_file.csv";
     // TODO Link List API
-    operation_t * head = malloc(sizeof(operation_t));  
-    operation_t * tail = head;
-    read_file(test_file);
+    // TODO Test Link list API  
+    
+    // Choose file name
+    char *test_file = "data/test_file.csv";
+   
+    // Get data
+    operation_t * list_head = read_file(test_file);
 
-    return 1;
+
+
+
+    
+    // Delete list
+    for(int counter = 0;list_head->next_ptr != NULL;++counter){
+        list_head = remhead(list_head);
+    }   
+    free(list_head);
+
+    return true;
 }

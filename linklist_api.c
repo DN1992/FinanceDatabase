@@ -22,7 +22,6 @@ bool add2tail(operation_t *head,operation_t *new_el){
         aux=aux->next_ptr;
     }
     aux->next_ptr=new_el;
-    aux=NULL;
     return true;
 }
 
@@ -55,11 +54,11 @@ bool remtail(operation_t * head){
     return true;
 }
 
-bool remhead(operation_t * head){
-    operation_t * new_head=head;
-    head=head->next_ptr;
-    free(new_head);
-    return true;
+operation_t * remhead(operation_t * head){
+    operation_t * new_head=(operation_t *) malloc(sizeof(operation_t));
+    new_head=head->next_ptr;
+    free(head);
+    return new_head;
 }
 
 bool remel(operation_t * head, int16_t index){

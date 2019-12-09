@@ -37,7 +37,7 @@ bool add2tail(operation_t *head,operation_t *new_el);
 bool addel(operation_t * head, operation_t * new_el, int32_t index);
 operation_t * getel(operation_t * head, int32_t index);
 bool remtail(operation_t * head);
-bool remhead(operation_t * head);
+operation_t * remhead(operation_t * head);
 bool remel(operation_t * head, int16_t index);
 
 #endif
