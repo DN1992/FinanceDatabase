@@ -8,12 +8,10 @@
  */
 
 #include "linklist_api.h"
-// TODO Test Link list API  
 
-bool add2head(operation_t *head,operation_t *new_el){
+operation_t * add2head(operation_t *head,operation_t *new_el){
     new_el->next_ptr=head;
-    head = new_el;
-    return true;
+    return new_el;
 }
 
 bool add2tail(operation_t *head,operation_t *new_el){
@@ -70,3 +68,30 @@ bool remel(operation_t * head, int16_t index){
     
     return true;
 }
+
+bool dellist(operation_t * head){
+    for(int32_t counter = 1;head != NULL;++counter){
+        head = remhead(head);
+    }
+    return true;
+}
+
+bool printlist(operation_t * head){
+    
+    for(operation_t * aux = head; aux!=NULL; aux=aux->next_ptr){
+        printlistel(aux);
+    }
+
+    return true;
+}
+bool printlistel(operation_t * listel){
+
+    printf("\n#%d in %d-%d-%d\n",listel->id, listel->time.day,listel->time.month,listel->time.year);
+    printf("Title: %s\n",listel->title);
+    printf("Amount: %.2f€\n",listel->amount);
+    printf("Cat: %s - %s\n",listel->cat,listel->subcat);
+
+    return true;
+}
+
+

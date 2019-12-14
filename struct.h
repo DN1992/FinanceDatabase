@@ -15,7 +15,6 @@ typedef struct Operation{
     uint32_t id;
     date_t time;
     uint8_t account;
-    int8_t io;
     float amount;
     char cat[CATSIZE];
     char subcat[CATSIZE];

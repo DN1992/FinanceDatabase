@@ -1,3 +1,13 @@
+/*
+ * Filename: /home/diogo/Documents/FinanceDatabase/read_data.c
+ * Path: /home/diogo/Documents/FinanceDatabase
+ * Created Date: Sunday, December 8th 2019, 10:45:52 pm
+ * Author: Diogo Neves
+ * 
+ * Copyright (c) 2019 Your Company
+ */
+
+
 #include "read_data.h"
 
 operation_t * read_file(char *filename){
@@ -46,6 +56,8 @@ operation_t * str2dat_elem(char *string){
     // Variable init
     char * date;
     char * buffer;
+    int8_t io;
+
 
     // Next list element init 
     operation_t * new_el = (operation_t *)calloc(1,sizeof(operation_t));
@@ -57,20 +69,25 @@ operation_t * str2dat_elem(char *string){
     }
     // SAVE CASH FLOW SIGNAL
     if((buffer=strsep(&string,";"))!=NULL){
-        new_el->io = (int8_t) atoi(buffer) ;
+        io = (int8_t) atoi(buffer) ;
+        io = ( io == 0 ? -1 : 1 );
     }
-    // SAVE CASH FLOW SIGNAL
+    
+    // SAVE TRANSFER TITLE
     if((buffer = strsep(&string,";")) != NULL){
         strncpy(new_el->title, buffer,sizeof(new_el->title));
         new_el->title[NOTESIZE-1] = '\0';
     }
     
+    // SAVE TRANSFER AMOUNT
     if((buffer=strsep(&string,";"))!=NULL){
-        new_el->amount = atof(buffer);
+        new_el->amount = (float) io*atof(buffer);
     }
     
+    // DISCARD TRANSFER NOTE
     buffer=strsep(&string,";");
 
+    // SAVE TRANSFER CATEGORIES
     if((buffer=strsep(&string,";"))!=NULL){
         strncpy(new_el->subcat,buffer,sizeof(new_el->subcat));
         new_el->subcat[CATSIZE-1] = '\0';
@@ -79,6 +96,7 @@ operation_t * str2dat_elem(char *string){
         strncpy(new_el->cat,buffer,sizeof(new_el->cat));
         new_el->cat[CATSIZE-1] = '\0';
     }
+    // SAVE TRANSFER ACCOUNT
     if((buffer=strsep(&string,";"))!=NULL){
         if(!(strcmp(buffer,"CGD"))){
             new_el->account=1;
