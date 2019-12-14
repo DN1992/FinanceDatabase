@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "linklist_api.h": "c",
+        "struct.h": "c",
+        "read_data.h": "c"
+    }
+}

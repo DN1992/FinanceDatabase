@@ -2,8 +2,8 @@
 #ifndef _CUSTOM_STRUCTURES
 #define _CUSTOM_STRUCTURES
 
-#define NOTESIZE 50
-#define CATSIZE 10
+#define NOTESIZE 60
+#define CATSIZE 15
 
 typedef struct Date{
     uint16_t year;
@@ -15,7 +15,6 @@ typedef struct Operation{
     uint32_t id;
     date_t time;
     uint8_t account;
-    int8_t io;
     float amount;
     char cat[CATSIZE];
     char subcat[CATSIZE];

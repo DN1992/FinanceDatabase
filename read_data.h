@@ -27,16 +27,17 @@
 
 // Custom libraries
 #include "struct.h"
+#include "linklist_api.h"
 
 // Functions parameters
 #define BUFFSIZE 2048
 #define DEBUG 1
 
 // Opens the file and reads each line of data
-bool read_file(char *filename);
+operation_t * read_file(char *filename);
 
 // Transforms the line string into data
-struct Operation *str2dat_elem(char *string, operation_t *dataptr);
+operation_t * str2dat_elem(char *stringr);
 
 // Transforms the string into a date
 bool string2date();
