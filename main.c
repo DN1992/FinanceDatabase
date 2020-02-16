@@ -22,6 +22,9 @@ int main(){
     
     printlist(list_head);
     
+    char filename[] = "testelist.txt";
+    writelist(list_head,filename);
+
     // Delete list
     dellist(list_head);
     return true;

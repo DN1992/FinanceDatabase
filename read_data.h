@@ -28,6 +28,7 @@
 // Custom libraries
 #include "struct.h"
 #include "linklist_api.h"
+#include "data_operations.h"
 
 // Functions parameters
 #define BUFFSIZE 2048

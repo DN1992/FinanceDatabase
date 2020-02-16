@@ -54,7 +54,6 @@ operation_t * read_file(char *filename){
 /////////////////////////////////////////////////////////////////////////////////
 operation_t * str2dat_elem(char *string){
     // Variable init
-    char * date;
     char * buffer;
     int8_t io;
 
@@ -65,7 +64,7 @@ operation_t * str2dat_elem(char *string){
     
     // SAVE DATE
     if((buffer=strsep(&string,";"))!=NULL){
-        date = buffer;
+        string2date(buffer,new_el);
     }
     // SAVE CASH FLOW SIGNAL
     if((buffer=strsep(&string,";"))!=NULL){
@@ -98,24 +97,9 @@ operation_t * str2dat_elem(char *string){
     }
     // SAVE TRANSFER ACCOUNT
     if((buffer=strsep(&string,";"))!=NULL){
-        if(!(strcmp(buffer,"CGD"))){
-            new_el->account=1;
-        }
-        else if(!(strcmp(buffer,"Activo"))){
-            new_el->account=2;
-        }
+        new_el->account=accountID2integer(buffer);
     }
 
-    // DIVIDES DATE INTO A VECTOR
-    buffer = strsep(&date,"-");
-    if(buffer==NULL){
-        printf("\nNO DATE FOR THE OPERATION!\n");
-    }
-    else{
-        new_el->time.day    = atoi( buffer );
-        new_el->time.month  = atoi( strsep(&date,"-") );
-        new_el->time.year   = atoi( strsep(&date,"-") );
 
-    }
     return new_el;
 }
